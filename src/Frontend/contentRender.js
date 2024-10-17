@@ -49,7 +49,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
         }
     }, [uploadFileAPI]);
 
-    const handleSave = useCallback(async (updatedHTMLContent) => {
+    const save = async (updatedHTMLContent) => {
         blockAutoscroll();
         const html = extractHTMLContent(updatedHTMLContent);
         if (!html) return;
@@ -70,8 +70,9 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
         } finally {
             setIsSaving(false);
         }
-    }, [chatAPI, messages, msgIndex, setMessages, uploadHTMLContent]);
+    }
 
+    const handleSave = useCallback(save, [chatAPI, messages, msgIndex, setMessages, uploadHTMLContent]);
     const debouncedHandleSave = useRef(debounce(handleSave, 300)).current;
 
     useEffect(() => {
@@ -173,10 +174,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                         setTimeout(() => sendButtonRef.current?.click(), 1000)
                         let execTimeout;
                         window.addEventListener('newTokens', (e) => {
-                            const onFinish = () => {
-                                handleSave(currentHTMLContentRef.current)
-                                setBlockingLoading(false)
-                            }
+                            const onFinish = () => setBlockingLoading(false)
                             if (e?.detail?.tokens?.find(o => o.includes('</html>'))) onFinish()
                             if (execTimeout) clearTimeout(execTimeout)
                             execTimeout = setTimeout(() => onFinish(), 2000)
@@ -215,10 +213,12 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
         setDragMode(prevMode => (prevMode === 'translate' ? 'disabled' : 'translate'));
     };
 
-    const handlePreviewClick = () => {
-        handleSave(currentHTMLContentRef.current)
+    const handlePreviewClick = async () => {
+        setBlockingLoading({text: "Upload Webpage"})
+        await save(currentHTMLContentRef.current)
         const url = getBaseURL(KB) + generateFilename(currentHTMLContentRef.current);
         window.open(url, '_blank');
+        setBlockingLoading(false)
     };
 
     const loaderStyle = { position: 'absolute', top: 14, left: 0, right: 0, height: 2, zIndex: 1000 };
