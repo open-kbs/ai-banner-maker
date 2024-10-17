@@ -39,7 +39,7 @@ export const addBlocks = ({editor, KB}) => {
         content: `
         ${commonStyles}
         <div class="kb-block call-to-action">
-            <h2>Don't Miss Out!</h2>
+            <h2>Call to Action!</h2>
             <button>Act Now</button>
         </div>
     `,

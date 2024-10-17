@@ -24,7 +24,8 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
     const editorContainerRef = useRef(null);
     const editorRef = useRef(null);
     const [grapesjs, setGrapesjs] = useState(null);
-    const { msgIndex, messages, setMessages, chatAPI, KB, uploadFileAPI, setBlockingLoading, blockAutoscroll } = params;
+    const { msgIndex, messages, setMessages, chatAPI, KB, uploadFileAPI, setBlockingLoading, blockAutoscroll,
+    setInputValue, sendButtonRef } = params;
 
     const currentHTMLContentRef = useRef(htmlContent);
     const isLocalContentUpdate = useRef(false);
@@ -37,8 +38,10 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
     }
 
     const uploadHTMLContent = useCallback(async (htmlContent) => {
+        const html = extractHTMLContent(htmlContent);
+        if (!html) return;
         try {
-            const blob = new Blob([extractHTMLContent(htmlContent)], { type: 'text/html' });
+            const blob = new Blob([html], { type: 'text/html' });
             const file = new File([blob], generateFilename(htmlContent), { type: 'text/html' });
             await uploadAsset(file)
         } catch (e) {
@@ -49,6 +52,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
     const handleSave = useCallback(async (updatedHTMLContent) => {
         blockAutoscroll();
         const html = extractHTMLContent(updatedHTMLContent);
+        if (!html) return;
         try {
             setIsSaving(true);
             isLocalContentUpdate.current = true;
@@ -113,9 +117,11 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                                 console.error('Error uploading file:', error);
                             }
                         }
-                        setTimeout(() => editor.AssetManager.add(toAdd), 1000)
+                        setTimeout(() => {
+                            editor.AssetManager.add(toAdd)
+                            setBlockingLoading(false)
+                        }, 1000)
 
-                        setBlockingLoading(false)
                     }
                 }
             });
@@ -157,6 +163,29 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                 bm.render();
             });
 
+            editor.on('block:drag:stop', (component, block) => {
+                if (block && component) {
+                    if (!block.get('id')?.startsWith('image')) {
+                        blockAutoscroll(0);
+                        const msg = `Make the "${block.get('label')}" a natural part of this banner in terms of style, colors, content and design`;
+                        setBlockingLoading({text: msg})
+                        setInputValue(msg)
+                        setTimeout(() => sendButtonRef.current?.click(), 1000)
+                        let execTimeout;
+                        window.addEventListener('newTokens', (e) => {
+                            const onFinish = () => {
+                                handleSave(currentHTMLContentRef.current)
+                                setBlockingLoading(false)
+                            }
+                            if (e?.detail?.tokens?.find(o => o.includes('</html>'))) onFinish()
+                            if (execTimeout) clearTimeout(execTimeout)
+                            execTimeout = setTimeout(() => onFinish(), 2000)
+                        })
+
+                    }
+                }
+            });
+
             editor.on('component:add component:remove component:update component:styleUpdate style:change', () => {
                 const updatedHTMLContent = getFullHtml(editorRef.current, currentHTMLContentRef.current);
                 if (updatedHTMLContent !== currentHTMLContentRef.current) {
@@ -187,6 +216,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
     };
 
     const handlePreviewClick = () => {
+        handleSave(currentHTMLContentRef.current)
         const url = getBaseURL(KB) + generateFilename(currentHTMLContentRef.current);
         window.open(url, '_blank');
     };
@@ -236,7 +266,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
 const onRenderChatMessage = async (params) => {
     const { content } = params.messages[params.msgIndex];
     if (isContentHTML(content)) {
-        const html = extractHTMLContent(content);
+        const html = extractHTMLContent(content) || content;
         return <GrapesJSEditor htmlContent={html} params={params} />;
     }
 

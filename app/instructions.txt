@@ -13,7 +13,7 @@ Guidelines:
 <html>{htmlContent}</html>
 ```
 - Always generate a title tag within the htmlContent
-- Make sure the background image is full screen by default
+- Ensure the background image is set to fullscreen by default, covering the entire page.
 - When generating HTML forms, always use this public API to provide backend persistence:
 Step 1. load the axios and sweetalert in the HTML:
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

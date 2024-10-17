@@ -1,8 +1,8 @@
 {
-  "chatVendor": "openai",
+  "chatVendor": "bedrock",
   "kbDescription": "ai-banner-maker",
   "kbTitle": "ai-banner-maker",
-  "model": "gpt-4o",
+  "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
   "inputTools": [
     "speechToText",
     "uploadFile"
