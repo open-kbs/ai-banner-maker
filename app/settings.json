@@ -1,0 +1,14 @@
+{
+  "chatVendor": "openai",
+  "kbDescription": "ai-banner-maker",
+  "kbTitle": "ai-banner-maker",
+  "model": "gpt-4o",
+  "inputTools": [
+    "speechToText",
+    "uploadFile"
+  ],
+  "embeddingModel": "none",
+  "embeddingDimension": "none",
+  "searchEngine": "IndexedDB",
+  "itemTypes": {}
+}
