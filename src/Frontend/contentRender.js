@@ -20,12 +20,13 @@ const debounce = (func, wait) => {
     };
 };
 
+
 const GrapesJSEditor = ({ htmlContent, params }) => {
     const editorContainerRef = useRef(null);
     const editorRef = useRef(null);
     const [grapesjs, setGrapesjs] = useState(null);
     const { msgIndex, messages, setMessages, chatAPI, KB, uploadFileAPI, setBlockingLoading, blockAutoscroll,
-    setInputValue, sendButtonRef } = params;
+    setInputValue, sendButtonRippleRef } = params;
 
     const currentHTMLContentRef = useRef(htmlContent);
     const isLocalContentUpdate = useRef(false);
@@ -168,18 +169,9 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                 if (block && component) {
                     if (!block.get('id')?.startsWith('image')) {
                         blockAutoscroll(0);
-                        const msg = `Make the "${block.get('label')}" a natural part of this banner in terms of style, colors, content and design`;
-                        setBlockingLoading({text: msg})
-                        setInputValue(msg)
-                        setTimeout(() => sendButtonRef.current?.click(), 1000)
-                        let execTimeout;
-                        window.addEventListener('newTokens', (e) => {
-                            const onFinish = () => setBlockingLoading(false)
-                            if (e?.detail?.tokens?.find(o => o.includes('</html>'))) onFinish()
-                            if (execTimeout) clearTimeout(execTimeout)
-                            execTimeout = setTimeout(() => onFinish(), 2000)
-                        })
-
+                        const msg = `Make the "${block.get('label')}" a natural part of this banner in terms of style, colors, content and design.`;
+                        setInputValue(prev => prev ? prev + msg : msg )
+                        setTimeout(() => sendButtonRippleRef?.current?.pulsate(), 100)
                     }
                 }
             });
