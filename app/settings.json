@@ -1,0 +1,26 @@
+{
+  "chatVendor": "bedrock",
+  "kbDescription": "Creates HTML5 banners using generative AI",
+  "kbTitle": "AI Banner Maker: Creates HTML5 banners using generative AI",
+  "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+  "inputTools": [
+    "speechToText",
+    "uploadFile"
+  ],
+  "embeddingModel": "none",
+  "embeddingDimension": "none",
+  "searchEngine": "IndexedDB",
+  "itemTypes": {},
+  "userId": "public",
+  "appId": "3h1f9a48fca",
+  "active": true,
+  "category": "technology",
+  "optionalServices": [],
+  "requiredServices": [
+    {
+      "interface": "text-generation",
+      "type": "main-chat-model"
+    }
+  ],
+  "slug": "ai-banner-maker"
+}
