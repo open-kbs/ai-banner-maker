@@ -84,6 +84,11 @@ npm run chat
 ### Step 6: Running the AI Services locally on your own GPU
 To run this AI app on your own GPU with Llama 3.1 and Stable Diffusion 3, read more here [Install OpenKBS AI Server](https://github.com/open-kbs/openkbs?tab=readme-ov-file#installing-openkbs-ai-server-and-integrating-llama-31-and-stable-diffusion-3-locally)
 
+
+## Install via WEB
+To install this app via our website visit [AI Banner Maker](https://openkbs.com/apps/ai-banner-maker/)
+
+
 ## License
 
 This project is licensed under the MIT License. For more details, please refer to the [LICENSE](https://github.com/open-kbs/ai-banner-maker/blob/main/LICENSE) file.
