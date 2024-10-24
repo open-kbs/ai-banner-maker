@@ -20,7 +20,13 @@
     {
       "interface": "text-generation",
       "type": "main-chat-model"
+    },
+    {
+      "codeSnippet": "        [/\\/?textToImage\\(\"(.*)\"\\)/, async (match) => {\n            const response = await openkbs.textToImage(match[1], { serviceId: '{{openkbsService.id}}' });\n            const imageSrc = `data:${response.ContentType};base64,${response.base64Data}`;\n            return { type: 'SAVED_CHAT_IMAGE', imageSrc, ...meta };\n        }],",
+      "interface": "text-to-image",
+      "type": "backend-chat-function"
     }
   ],
+  "optionalServices": [],
   "slug": "ai-banner-maker"
 }
