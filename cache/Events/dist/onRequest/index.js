@@ -49,7 +49,7 @@ __nccwpck_require__.d(__webpack_exports__, {
 ;// CONCATENATED MODULE: ./actions.js
 const getActions = (meta) => [
     [/\/?textToImage\("(.*)"\)/, async (match) => {
-        const response = await openkbs.textToImage(match[1], { serviceId: 'stability.sd3Medium' });
+        const response = await openkbs.textToImage(match[1]);
         const imageSrc = `data:${response.ContentType};base64,${response.base64Data}`;
         return { type: 'SAVED_CHAT_IMAGE', imageSrc, ...meta };
     }],
