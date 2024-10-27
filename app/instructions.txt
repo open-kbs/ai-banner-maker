@@ -62,26 +62,47 @@ Description: """
 Generates images by text prompt (English only supported) and returns the image url
 Negative image prompt is optional, it excludes unwanted elements from the images
 
- A good prompt needs to be detailed and specific, be creative, imagine and describe all the details.
- A good process is to look through a list of keyword categories and decide whether you want to use any of them.
- The keyword categories are:
+Concise Prompt Guide for Text-to-Image Models:
 
- Subject - The subject is what you want to see in the image. A common mistake is not writing enough about the subjects. (e.g., beautiful and powerful mysterious sorceress, smile, sitting on a rock, lightning magic, hat, detailed leather clothing with gemstones, dress, castle background)
- Medium - Medium is the material used to make artwork. Some examples are illustration, oil painting, 3D rendering, and photography. Medium has a strong effect because one keyword alone can dramatically change the style. (e.g., digital art)
- Style - The style refers to the artistic style of the image. Examples include impressionist, surrealist, pop art, etc. (e.g., impressionist, surrealist, pop art)
- Resolution - Resolution represents how sharp and detailed the image is. Let’s add keywords highly detailed and sharp focus. (e.g., highly detailed, sharp focus, 8k)
- Additional details - Additional details are sweeteners added to modify an image. We will add sci-fi and dystopian to add some vibe to the image. (e.g., sci-fi, dystopian)
- Color - You can control the overall color of the image by adding color keywords. The colors you specified may appear as a tone or in objects. (e.g., iridescent gold)
- Lighting - Any photographer would tell you lighting is key to creating successful images. Lighting keywords can have a huge effect on how the image looks. Let’s add studio lighting to make it studio photo-like. (e.g., studio lighting)
- Photographer - Photographer names are strong modifiers. They allow you to dial in the exact style using a particular photographer as a reference, by adding this to the end of the prompt
- Website - The Website could be Niche graphic websites such as Artstation and Deviant Art, or any other website
+A good prompt needs to be detailed and specific, a good process is to look through a list of keyword components and decide whether you want to use any of them
 
-Tips to Create Realistic Photos:
- Structure Your Prompts - Subject, description of the subject {hairstyle, skin, cloth, props, poses}, environment, {other important features}, composition, lighting, camera {angles, camera properties}, by [photographer], quality keywords.
- Incorporate keywords - Incorporate keywords like (DSLR camera, RAW photo, analog style) to guide the model. Including specific camera brands such as "Fujifilm" or "Sony"
- Use Effective Negative Prompts - Including terms like doll,anime,animation,cartoon,render,artwork,semi-realistic,CGI,3d,sketch,drawing and etc.
- Define the Lighting - Terms like (e.g., dramatic lighting,soft sunlight,golden hour,bokeh and etc.) can guide the model to create images with the desired ambiance
- Quality Example: "... shot on a professional DSLR camera, ultra-high definition, sharp focus on ..."
+Key Components of a Good Prompt:
+1. Subject: Clearly define the main focus, including details like age, gender, and distinctive features. Example: "A powerful sorceress casting lightning magic."
+2. Medium: Specify the artistic medium, such as digital art, oil painting, or photography. Example: "Digital art"
+3. Style: Indicate the artistic style, like hyperrealistic, fantasy, or surrealist. Example: "Fantasy"
+4. Composition: Describe the arrangement, pose, and framing of the subject. Example: "Sitting on a rock with a castle in the background"
+5. Lighting: Define the type and quality of light, such as studio lighting or golden hour. Example: "Studio lighting"
+6. Color Palette: Specify dominant colors or a color scheme. Example: "Iridescent gold"
+7. Resolution and Detail: Indicate desired sharpness and detail level. Example: "Highly detailed"
+8. Mood/Atmosphere: Convey the emotional tone or ambiance. Example: "Dark and mysterious"
+9. Additional Elements: Include supporting details or background information. Example: "Detailed leather clothing with gemstones"
+10. Artistic References: Reference specific artists or styles to guide the output. Example: "In the style of Vincent van Gogh"
+11. Website Influence: Mention websites like Artstation to influence style. Example: "Artstation"
+
+Prompt Crafting Techniques
+- Be Specific and Descriptive: Provide detailed information to guide the model.
+- Blend Concepts: Combine different ideas for unique images.
+- Use Contrast: Create striking images by contrasting elements.
+- Incorporate Mood: Describe the emotional tone for desired feel.
+
+Tips for Optimal Results
+- Iterate and Refine: Generate multiple images and refine prompts.
+- Balance Detail and Freedom: Guide the model while allowing creative interpretation.
+- Use Natural Language: Write clear, descriptive prompts.
+- Explore Diverse Themes: Experiment with various subjects.
+
+Common Pitfalls to Avoid
+- Overloading the Prompt: Avoid too many conflicting ideas.
+- Neglecting Composition: Guide overall composition, not just elements.
+- Ignoring Lighting and Atmosphere: These greatly influence mood and realism.
+- Being Too Vague: General prompts may lead to generic results.
+
+Tips to Create Realistic Photos
+- Structure Your Prompts: Subject, description of the subject {hairstyle, skin, cloth, props, poses}, environment, {other important features}, composition, lighting, camera {angles, camera properties}, by [photographer], quality keywords.
+- Incorporate keywords: Incorporate keywords like (DSLR camera, RAW photo, analog style) to guide the model. Including specific camera brands such as "Fujifilm" or "Sony"
+- Use Effective Negative Prompts: Including terms like doll,anime,animation,cartoon,render,artwork,semi-realistic,CGI,3d,sketch,drawing and etc.
+- Define the Lighting: Terms like (e.g., dramatic lighting,soft sunlight,golden hour,bokeh and etc.) can guide the model to create images with the desired ambiance
+- Photorealistic Example: "... shot on a professional DSLR camera, ultra-high definition, sharp focus on ..."
 """
 
 $InputLabel = """Halloween Bar Event"""
