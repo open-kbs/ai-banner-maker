@@ -144,6 +144,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
             editor.Panels.removeButton('devices-c', 'set-device-desktop');
             editor.Panels.removeButton('devices-c', 'set-device-tablet');
             editor.Panels.removeButton('devices-c', 'set-device-mobile');
+            editor.Panels.removeButton('options', 'preview');
 
             if (window.openkbs.isMobile) {
                 console.log(editor.Panels)
@@ -153,7 +154,6 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                 editor.Panels.removeButton('views', 'open-blocks');
                 document.documentElement.style.setProperty('--gjs-left-width', '0%');
                 document.documentElement.style.setProperty('--gjs-right-width', '0%');
-                editor.Panels.removeButton('options', 'preview');
                 editor.Panels.removeButton('options', 'fullscreen');
                 editor.Panels.removeButton('options', 'gjs-open-import-webpage');
             }
@@ -274,6 +274,7 @@ const Header = ({ setRenderSettings }) => {
         window.openkbs.disableDropzone = []
         setRenderSettings({
             setMessageWidth: (content) => isContentHTML(content) ? '90%' : undefined,
+            enableGenerationModelsSelect: true,
             disableShareButton: true,
             disableBalanceView: true,
             disableSentLabel: false,

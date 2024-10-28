@@ -1,6 +1,10 @@
 export const getActions = (meta) => [
     [/\/?textToImage\("([^"]*)"(?:,\s*"([^"]*)")?\)/, async (match) => {
-        const response = await openkbs.textToImage(match[1], match[2] ? { negative_prompt: match[2] } : undefined);
+        const hasDefaultImageToTextModel = !'{{variables.defaultImageToTextModel}}'.startsWith('{{')
+        const response = await openkbs.textToImage(match[1], {
+            negative_prompt: match[2],
+            serviceId: hasDefaultImageToTextModel ? '{{variables.defaultImageToTextModel}}' : undefined
+        });
         const imageSrc = `data:${response.ContentType};base64,${response.base64Data}`;
         return { type: 'SAVED_CHAT_IMAGE', imageSrc, ...meta };
     }],

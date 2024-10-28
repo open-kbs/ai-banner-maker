@@ -19,16 +19,6 @@
     {
       "interface": "text-generation",
       "type": "main-chat-model"
-    },
-    {
-      "codeSnippet": "        [/\\/?textToImage\\(\"([^\"]*)\"(?:,\\s*\"([^\"]*)\")?\\)/, async (match) => {\n            const response = await openkbs.textToImage(match[1], match[2] ? { negative_prompt: match[2] } : undefined, { serviceId: '{{openkbsService.id}}' });\n            const imageSrc = `data:${response.ContentType};base64,${response.base64Data}`;\n            return { type: 'SAVED_CHAT_IMAGE', imageSrc, ...meta };\n        }],",
-      "interface": "text-to-image",
-      "type": "backend-chat-function"
-    },
-    {
-      "codeSnippet": "        [/\\/?webpageToText\\(\"(.*)\"\\)/, async (match) => {\n            try {\n                let response = await openkbs.webpageToText(match[1]);\n\n                // limit output length\n                if (response?.content?.length > 5000) {\n                    response.content = response.content.substring(0, 5000);\n                }\n\n                return { data: response, ...meta };\n            } catch (e) {\n                return { error: e?.toString(), ...meta };\n            }\n        }],",
-      "interface": "webpage-to-text",
-      "type": "backend-chat-function"
     }
   ],
   "optionalServices": [],
