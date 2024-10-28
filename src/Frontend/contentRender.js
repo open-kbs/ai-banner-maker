@@ -141,6 +141,22 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
 
             editor.Panels.removeButton('options', 'export-template');
             editor.Panels.removeButton('options', 'sw-visibility');
+            editor.Panels.removeButton('devices-c', 'set-device-desktop');
+            editor.Panels.removeButton('devices-c', 'set-device-tablet');
+            editor.Panels.removeButton('devices-c', 'set-device-mobile');
+
+            if (window.openkbs.isMobile) {
+                console.log(editor.Panels)
+                editor.Panels.removeButton('views', 'open-sm');
+                editor.Panels.removeButton('views', 'open-tm');
+                editor.Panels.removeButton('views', 'open-layers');
+                editor.Panels.removeButton('views', 'open-blocks');
+                document.documentElement.style.setProperty('--gjs-left-width', '0%');
+                document.documentElement.style.setProperty('--gjs-right-width', '0%');
+                editor.Panels.removeButton('options', 'preview');
+                editor.Panels.removeButton('options', 'fullscreen');
+                editor.Panels.removeButton('options', 'gjs-open-import-webpage');
+            }
             editorRef.current = editor;
             window.editor = editor;
 
@@ -222,7 +238,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                         <IconButton
                             onClick={handleDragModeToggle}
                             aria-label="drag mode"
-                            style={{ position: 'absolute', top: 38, left: 110, zIndex: 100, color: dragMode === 'translate' ? '#D97AA6' : '#B9A5A6' }}
+                            style={{ position: 'absolute', top: 38, left: 42, zIndex: 100, color: dragMode === 'translate' ? '#D97AA6' : '#B9A5A6' }}
                         >
                             <OpenWith style={{ fontSize: 24 }} />
                         </IconButton>
@@ -231,7 +247,7 @@ const GrapesJSEditor = ({ htmlContent, params }) => {
                         <IconButton
                             onClick={handlePreviewClick}
                             aria-label="preview mode"
-                            style={{ position: 'absolute', top: 38, left: 142, zIndex: 100, color: '#B9A5A6' }}
+                            style={{ position: 'absolute', top: 38, left: 10, zIndex: 100, color: '#B9A5A6' }}
                         >
                             <Preview style={{ fontSize: 24 }} />
                         </IconButton>
