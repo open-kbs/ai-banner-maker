@@ -2,7 +2,7 @@
   "chatVendor": "bedrock",
   "kbDescription": "Creates HTML5 banners using generative AI",
   "kbTitle": "AI Banner Maker",
-  "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+  "model": "claude-3-7-sonnet-20250219",
   "inputTools": [
     "speechToText",
     "uploadFile"
